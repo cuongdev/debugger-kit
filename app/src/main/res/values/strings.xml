@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Debugger Kit</string>
+
+    <!-- Quick Settings tile labels (also used in the app) -->
+    <string name="tile_usb">USB debugging</string>
+    <string name="tile_wireless">Wireless debug</string>
+    <string name="tile_dev">Developer options</string>
+    <string name="tile_awake">Keep awake</string>
+    <string name="tile_panel">Dev panel</string>
+
+    <!-- Common -->
+    <string name="state_on">On</string>
+    <string name="state_off">Off</string>
+    <string name="state_on_caps">ON</string>
+    <string name="state_off_caps">OFF</string>
+    <string name="val_on">on</string>
+    <string name="val_off">off</string>
+    <string name="val_open">open</string>
+    <string name="val_no_wifi">no WiFi</string>
+    <string name="action_restore">Restore</string>
+    <string name="action_add">Add</string>
+    <string name="action_added">Added</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_applied">Applied</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_copied">Copied</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_set_up">Set up</string>
+    <string name="action_open">Open</string>
+    <string name="cd_back">Back</string>
+    <string name="msg_blocked">Blocked by a device policy</string>
+    <string name="msg_failed">Android did not apply the change</string>
+    <string name="msg_grant_in_setup">Grant the permission in Setup first</string>
+    <string name="msg_needs_shell">Needs Shizuku or root. Set it up in Debugger Kit.</string>
+    <string name="msg_no_browser">No browser found</string>
+    <string name="granted">Granted</string>
+    <string name="not_granted">Not granted</string>
+    <string name="allowed">Allowed</string>
+    <string name="allow">Allow</string>
+    <string name="minutes_short">%d min</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_bubble">Bubble</string>
+    <string name="nav_tiles">Tiles</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Feature names -->
+    <string name="usb_debugging">USB debugging</string>
+    <string name="wireless_debugging">Wireless debugging</string>
+    <string name="developer_options">Developer options</string>
+    <string name="keep_awake">Keep awake</string>
+    <string name="dev_panel">Dev panel</string>
+    <string name="floating_button">Floating button</string>
+    <string name="quick_settings_tiles">Quick Settings tiles</string>
+    <string name="debug_off_per_app">Debug off per app</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="display_over_apps">Display over other apps</string>
+    <string name="usage_access">Usage access</string>
+    <string name="restore_original">Restore original</string>
+    <string name="open_without_debugging">Open without debugging</string>
+
+    <!-- Home -->
+    <string name="home_device">Android %1$s · API %2$d</string>
+    <string name="home_refresh">Refresh status</string>
+    <string name="home_refreshed">Status refreshed</string>
+    <string name="managed_title">Managed by your organization</string>
+    <string name="managed_body">A device policy turns off debugging features. Debugger Kit will not override it.</string>
+    <string name="perm_needed_title">Permission needed</string>
+    <string name="perm_needed_body">Grant it once with ADB, Shizuku or root.</string>
+    <string name="perm_granted_line">WRITE_SECURE_SETTINGS granted</string>
+    <string name="toast_auto_off_on">Auto off on: %d min</string>
+    <string name="toast_auto_off_off">Auto off off. Turn USB debugging off yourself.</string>
+    <string name="wireless_off_sub">Off. Needs a WiFi network.</string>
+    <string name="dev_menu_visible">Menu visible</string>
+    <string name="dev_menu_hidden">Menu hidden</string>
+    <string name="awake_while_charging">While charging</string>
+    <string name="bubble_showing_right">Showing on the right edge</string>
+    <string name="bubble_showing_left">Showing on the left edge</string>
+    <string name="tiles_added_count">%1$d of %2$d tiles added</string>
+    <string name="rules_empty_sub">For banking and wallet apps that block debugging</string>
+    <string name="rules_auto_sub">%d apps, automatic</string>
+    <string name="rules_manual_sub">%d apps, automatic is off</string>
+    <string name="usb_sub_blocked">Kept off by a device policy.</string>
+    <string name="usb_sub_readonly">Read only until permission is granted.</string>
+    <string name="usb_sub_on_until">On. Turns off at %s.</string>
+    <string name="usb_sub_on">On. No auto off.</string>
+    <string name="usb_sub_off">Off. Tap the button to turn it on.</string>
+    <string name="usb_debugging_caps">USB DEBUGGING</string>
+    <string name="cd_toggle_usb">Toggle USB debugging</string>
+    <string name="chip_auto_off_min">Auto off %d min</string>
+    <string name="chip_auto_off_off">Auto off: off</string>
+
+    <!-- Setup -->
+    <string name="setup_granted_with">Granted with %s. Shortcuts marked S are unlocked too.</string>
+    <string name="setup_grant_failed">The grant did not go through. %s</string>
+    <string name="setup_label">One time setup</string>
+    <string name="setup_title">Let Debugger Kit change debug settings</string>
+    <string name="setup_body">Android only allows this after you grant WRITE_SECURE_SETTINGS once. The grant stays until you uninstall the app.</string>
+    <string name="setup_dev_enabled">Enabled</string>
+    <string name="setup_dev_turn_on">Turn on in Settings</string>
+    <string name="setup_secure_perm">Secure settings permission</string>
+    <string name="setup_overlay_optional">Optional, tap to allow</string>
+    <string name="setup_blocked_body">Debugging features are turned off by a device policy. Granting the permission will not change that.</string>
+    <string name="setup_reinstall_note">Run it in an empty folder on your computer. It reinstalls Debugger Kit with its permissions (also display over other apps and usage access). Your data is kept.</string>
+    <string name="setup_coloros">ColorOS blocks the usual grant command (SecurityException). Plug the phone into a computer and run:</string>
+    <string name="setup_plug_in">Plug the phone into a computer with platform tools, then run:</string>
+    <string name="setup_xiaomi">HyperOS and MIUI: first turn on USB debugging (Security settings) in Developer options.</string>
+    <string name="setup_if_fails">If it fails with SecurityException, use this instead. %s</string>
+    <string name="setup_guide_link">Guide for each phone brand</string>
+    <string name="setup_shizuku_running">Shizuku is running. Allow Debugger Kit when it asks. The app then grants the permission to itself, no computer needed.</string>
+    <string name="setup_shizuku_start">Start Shizuku with Wireless debugging first, then come back here.</string>
+    <string name="setup_shizuku_connect">Connect to Shizuku</string>
+    <string name="setup_shizuku_open">Open Shizuku</string>
+    <string name="setup_shizuku_install">Install Shizuku and start it, then come back.</string>
+    <string name="setup_shizuku_denied">Shizuku permission was denied</string>
+    <string name="setup_root_body">Debugger Kit runs the same grant command once with su. Root is then only used for shortcuts marked S.</string>
+    <string name="setup_root_waiting">Waiting for root</string>
+    <string name="setup_root_grant">Grant with root</string>
+    <string name="setup_root_denied">Root access was not granted</string>
+    <string name="setup_privacy">Only touches adb_enabled, adb_wifi_enabled, development_settings_enabled, stay_on_while_plugged_in and the dev panel settings you pick. No internet permission.</string>
+    <string name="setup_check">Check and continue</string>
+    <string name="setup_not_yet">Not granted yet. Run the command, then check again.</string>
+
+    <!-- Bubble screen -->
+    <string name="bubble_sub">A small bubble that stays on top of every app.</string>
+    <string name="bubble_show">Show floating button</string>
+    <string name="bubble_allow_toast">Allow Debugger Kit to display over other apps, then come back</string>
+    <string name="bubble_overlay_allowed">Display over other apps: allowed</string>
+    <string name="bubble_overlay_not_allowed">Display over other apps: not allowed yet</string>
+    <string name="preview_caps">PREVIEW</string>
+    <string name="gestures">Gestures</string>
+    <string name="gesture_tap">Tap</string>
+    <string name="gesture_long_press">Long press</string>
+    <string name="gesture_double_tap">Double tap</string>
+    <string name="gesture_drag">Drag to bottom</string>
+    <string name="gesture_long_value">Open dev panel</string>
+    <string name="gesture_double_value">Apply preset: UI test</string>
+    <string name="gesture_drag_value">Hide the bubble</string>
+    <string name="customize_panel">Customize dev panel</string>
+    <string name="customize_panel_sub">%d shortcuts and 3 presets selected</string>
+    <string name="behavior">Behavior</string>
+    <string name="size">Size</string>
+    <string name="idle_opacity">Idle opacity</string>
+    <string name="idle_opacity_sub">Used when docking is off</string>
+    <string name="dock_idle">Dock to edge when idle</string>
+    <string name="dock_idle_sub">Shrinks to a slim tab after 3 seconds</string>
+    <string name="keep_on_visible">Keep screen on while visible</string>
+    <string name="keep_on_visible_sub">Works on battery too. Uses more power.</string>
+    <string name="toast_grant_first">Grant the permission in Debugger Kit first</string>
+    <string name="toast_bubble_hidden">Floating button hidden. Turn it back on in Debugger Kit.</string>
+    <string name="cd_bubble">Debugger Kit floating button</string>
+
+    <!-- Dev panel -->
+    <string name="panel_config_sub">Long press the bubble to open it. Pick the shortcuts you reach for most, so you never dig through Developer options again.</string>
+    <string name="shell_shizuku_ok">Shizuku connected. Every shortcut works.</string>
+    <string name="shell_root_ok">Root connected. Every shortcut works.</string>
+    <string name="shell_missing">Needs Shizuku or root. Everything else only needs the ADB grant. Tap to set up.</string>
+    <string name="in_panel_count">%1$d of %2$d in panel</string>
+    <string name="target_app">Target app</string>
+    <string name="package_name">Package name</string>
+    <string name="target_hint">Force stop, clear data and restart it from the panel.</string>
+    <string name="target_invalid">Use a package name like com.example.app</string>
+    <string name="save_target">Save target app</string>
+    <string name="presets">Presets</string>
+    <string name="snapshot_saved">Snapshot saved at %s, before the first change.</string>
+    <string name="snapshot_none">Nothing changed yet. The first change saves a snapshot.</string>
+    <string name="cd_close_panel">Close dev panel</string>
+    <string name="panel_empty">No shortcuts selected yet. Pick them in Debugger Kit.</string>
+    <string name="panel_target_app">TARGET APP</string>
+    <string name="force_stop">Force stop</string>
+    <string name="clear_data">Clear data</string>
+    <string name="restart">Restart</string>
+    <string name="panel_shell_hint">Shortcuts marked S need Shizuku or root. Tap to set up.</string>
+
+    <string name="dev_anim">Animation scale</string>
+    <string name="dev_anim_sub">Off, 0.5x, 1x</string>
+    <string name="dev_taps">Show taps</string>
+    <string name="dev_taps_sub">Touch dots on screen</string>
+    <string name="dev_pointer">Pointer location</string>
+    <string name="dev_pointer_sub">Live x and y overlay</string>
+    <string name="dev_stay_awake">Stay awake</string>
+    <string name="dev_stay_awake_sub">Screen on while charging</string>
+    <string name="dev_dont_keep">Don\'t keep activities</string>
+    <string name="dev_dont_keep_sub">Test state restore</string>
+    <string name="dev_font">Font scale</string>
+    <string name="dev_font_sub">1x, 1.3x, 2x</string>
+    <string name="dev_adb_connect" translatable="false">adb connect</string>
+    <string name="dev_adb_connect_sub">Copy IP and port</string>
+    <string name="dev_devopts_sub">Jump to system screen</string>
+    <string name="dev_bounds">Layout bounds</string>
+    <string name="dev_bounds_sub">View borders and margins</string>
+    <string name="dev_overdraw">GPU overdraw</string>
+    <string name="dev_overdraw_sub">Color overlay</string>
+    <string name="dev_gpubars">GPU render bars</string>
+    <string name="dev_gpubars_sub">Frame time per frame</string>
+    <string name="dev_dark">Dark mode</string>
+    <string name="dev_dark_sub">System night mode</string>
+    <string name="dev_demo">Demo mode</string>
+    <string name="dev_demo_sub">Clean status bar</string>
+
+    <string name="preset_ui">UI test</string>
+    <string name="preset_ui_sub">animations 0 · stay awake · taps</string>
+    <string name="preset_shot">Screenshot</string>
+    <string name="preset_shot_sub">demo mode · light theme · no taps</string>
+    <string name="preset_perf">Perf check</string>
+    <string name="preset_perf_sub">GPU bars · overdraw · anim 1x</string>
+
+    <string name="out_toggle">%1$s %2$s</string>
+    <string name="out_animations">Animations %s</string>
+    <string name="out_font_scale">Font scale %sx</string>
+    <string name="out_devopts_missing">Developer options screen not found</string>
+    <string name="log_preset_applied">Preset %s applied</string>
+    <string name="out_preset_applied">%1$s applied. Settings changed: %2$d.</string>
+    <string name="out_preset_skipped">Need Shizuku or root: %d.</string>
+    <string name="out_nothing_restore">Nothing to restore</string>
+    <string name="log_restored">Settings restored: %d</string>
+    <string name="out_restored_all">Settings restored to their original values: %d</string>
+    <string name="out_restored_partial">Settings restored: %1$d. Still need Shizuku or root: %2$d.</string>
+    <string name="out_force_stopped">Force stopped %s</string>
+    <string name="out_cleared">Cleared data of %s</string>
+    <string name="out_bad_package">Package name is not valid</string>
+    <string name="out_no_launcher">%s has no launcher screen</string>
+    <string name="out_restarted">Restarted %s</string>
+    <string name="out_wireless_first">Turn on Wireless debugging first</string>
+    <string name="out_no_wifi">Not connected to WiFi</string>
+    <string name="out_copied">Copied: %s</string>
+    <string name="out_copied_ip">Copied IP %s. The port needs Shizuku or root, see Wireless debugging in Settings.</string>
+    <string name="out_failed">Android did not apply: %s</string>
+
+    <!-- Activity log -->
+    <string name="log_usb_on">USB debugging ON</string>
+    <string name="log_usb_off">USB debugging OFF</string>
+    <string name="log_wifi_on">Wireless debug ON</string>
+    <string name="log_wifi_off">Wireless debug OFF</string>
+    <string name="log_dev_on">Developer options ON</string>
+    <string name="log_dev_off">Developer options OFF</string>
+    <string name="log_awake_on">Keep awake ON</string>
+    <string name="log_awake_off">Keep awake OFF</string>
+    <string name="log_auto_off_disabled">Auto off disabled</string>
+
+    <!-- Notification -->
+    <string name="notif_channel_desc">Keeps the floating button and the auto off timer running</string>
+    <string name="notif_paused_title">Debugging paused for %s</string>
+    <string name="notif_usb_on">USB debugging is on</string>
+    <string name="notif_bubble_active">Floating button is active</string>
+    <string name="notif_rules_watching">Debug off per app is watching</string>
+    <string name="notif_paused_text">It turns back on when you leave the app</string>
+    <string name="notif_turns_off_at">Turns off at %s</string>
+    <string name="notif_no_auto_off">No auto off set</string>
+    <string name="notif_long_press">Long press the bubble for the dev panel</string>
+    <string name="notif_apps_count">%d apps in your list</string>
+    <string name="notif_turn_off">Turn off</string>
+    <string name="notif_add_30">Add 30 min</string>
+
+    <!-- Tiles -->
+    <string name="tile_blocked">Blocked by policy</string>
+    <string name="tile_tap_setup">Tap to set up</string>
+    <string name="tile_auto_off_in">Auto off in %dm</string>
+    <string name="tiles_sub">Add a tile once, then toggle from the notification shade without opening the app.</string>
+    <string name="tiles_preview">Preview in shade</string>
+    <string name="tiles_none">No tiles added yet.</string>
+    <string name="tiles_available">Available tiles</string>
+    <string name="tiles_count">%1$d of %2$d added</string>
+    <string name="tiles_behavior">Tile behavior</string>
+    <string name="tiles_require_unlock">Require unlock</string>
+    <string name="tiles_require_unlock_sub">Asks for your PIN before a tile changes anything on the lock screen.</string>
+    <string name="tiles_long_press">Long press opens</string>
+    <string name="tiles_note">Android 13 and later ask you to confirm each tile. On older versions, edit the Quick Settings panel and drag the tile in.</string>
+    <string name="tiles_add_manual">Open Quick Settings, tap edit, then drag the %s tile in</string>
+    <string name="tile_usb_desc">Tap to toggle. Long press opens Developer options.</string>
+    <string name="tile_wifi_desc">Shows the IP under the label when on.</string>
+    <string name="tile_dev_desc">Shows or hides the whole system menu.</string>
+    <string name="tile_awake_desc">Screen stays on while charging.</string>
+    <string name="tile_panel_desc">Opens your shortcuts and presets over the current app.</string>
+
+    <!-- Settings -->
+    <string name="safety">Safety</string>
+    <string name="auto_off_usb">Auto off USB debugging</string>
+    <string name="auto_off_on_sub">Turns USB debugging off after the time below</string>
+    <string name="auto_off_off_sub">Off. USB debugging stays on until you turn it off</string>
+    <string name="after">After</string>
+    <string name="exact_timing">Exact auto off timing</string>
+    <string name="exact_on_sub">Turns off on the minute</string>
+    <string name="exact_off_sub">Off: Android may run auto off up to 10 min late when the bubble is hidden</string>
+    <string name="off_on_lock">Turn off when screen locks</string>
+    <string name="needs_bubble_sub">Works while the floating button is on</string>
+    <string name="wifi_guard">Wireless off on a new network</string>
+    <string name="wifi_guard_sub">Stops port exposure on untrusted networks</string>
+    <string name="screen_while_debugging">Screen while debugging</string>
+    <string name="keep_screen_on">Keep screen on</string>
+    <string name="keep_screen_on_sub">Only while USB debugging is on</string>
+    <string name="mode">Mode</string>
+    <string name="recommended">Recommended</string>
+    <string name="mode_always">Always</string>
+    <string name="mode_needs_bubble">Needs the bubble</string>
+    <string name="restore_screen">Restore when debugging ends</string>
+    <string name="restore_screen_sub">Puts back your own stay awake value</string>
+    <string name="lock_note">Your PIN, pattern or password stays in place. Debugger Kit only stops the screen from timing out. Pressing power still locks the phone, and work phone policies always win.</string>
+    <string name="activity_log">Activity log</string>
+    <string name="log_empty">No changes yet.</string>
+    <string name="export_csv">Export CSV</string>
+    <string name="export_subject">Debugger Kit activity log</string>
+    <string name="export_chooser">Export activity log</string>
+    <string name="about">About</string>
+    <string name="permissions">Permissions</string>
+    <string name="shell_access">Shell access</string>
+    <string name="shell_shizuku_off">Shizuku, not running</string>
+    <string name="shell_none">None</string>
+    <string name="version">Version</string>
+    <string name="project">Project</string>
+    <string name="author">Author</string>
+    <string name="source_code">Source code</string>
+    <string name="report_issue">Report an issue</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="no_data_collected">No data collected</string>
+    <string name="oss_licenses">Open source licenses</string>
+    <string name="language">Language</string>
+    <string name="language_system">System</string>
+    <string name="language_follows_system">Follows system</string>
+    <string name="licenses_sub">Debugger Kit is built with these projects.</string>
+    <string name="licenses_footer">Made by %1$s. Source code at %2$s</string>
+
+    <!-- Debug off per app -->
+    <string name="rules_sub">Banking and wallet apps often refuse to run while debugging is on. Debugger Kit turns it off while they are open, and back on when you leave.</string>
+    <string name="rules_auto">Turn off automatically</string>
+    <string name="rules_auto_sub_ok">Runs in the background with a small notification</string>
+    <string name="rules_auto_sub_need">Needs Usage access to see which app is open</string>
+    <string name="rules_blocked_body">A device policy controls debugging, so app rules have nothing to change.</string>
+    <string name="rules_perm_body">Grant WRITE_SECURE_SETTINGS in Setup first.</string>
+    <string name="apps">Apps</string>
+    <string name="add_app">Add app</string>
+    <string name="rules_none">No apps yet. Add the apps that complain about developer options or USB debugging.</string>
+    <string name="rules_no_shortcuts">This launcher does not accept shortcuts</string>
+    <string name="rules_note">Debugging is really turned off, the app reads the true value. Nothing is faked. Apps that also block root or accessibility services keep doing so. Turning off USB debugging disconnects ADB from your computer until it turns back on.</string>
+    <string name="rules_paused_now">Debugging paused for this app now</string>
+    <string name="cd_remove">Remove %s</string>
+    <string name="rules_turn_off">While it is open, turn off</string>
+    <string name="add_to_home">Add to home</string>
+    <string name="add_apps">Add apps</string>
+    <string name="add_apps_sub">Tap an app to add or remove it.</string>
+    <string name="search_apps">Search apps</string>
+    <string name="loading_apps">Loading apps</string>
+    <string name="rules_not_listed">This app is not in your list</string>
+    <string name="rules_app_not_found">App not found</string>
+    <string name="rules_stays_off">Debugging stays off. Turn it back on when you are done.</string>
+    <string name="rules_shortcut_long">%s without debugging</string>
+</resources>
