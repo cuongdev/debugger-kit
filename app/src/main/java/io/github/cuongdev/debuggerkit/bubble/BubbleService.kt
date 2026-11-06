@@ -335,6 +335,9 @@ class BubbleService : LifecycleService(), SavedStateRegistryOwner {
         val b = bubble ?: return
         if (b.docked) return
         b.dockRight = anchoredRight
+        // The tab is narrower than the bubble, so always pin it flush to its screen edge.
+        lp.gravity = Gravity.TOP or if (anchoredRight) Gravity.RIGHT else Gravity.LEFT
+        lp.x = 0
         lp.y += (b.undockedSize() - b.dockedHeight()) / 2
         b.docked = true
         b.alpha = 1f
@@ -396,9 +399,6 @@ class BubbleService : LifecycleService(), SavedStateRegistryOwner {
                     dragging = false
                     downX = e.rawX
                     downY = e.rawY
-                    toAbsolute()
-                    startX = lp.x
-                    startY = lp.y
                 }
                 MotionEvent.ACTION_MOVE -> {
                     if (swallow) return true
@@ -406,6 +406,11 @@ class BubbleService : LifecycleService(), SavedStateRegistryOwner {
                     val dy = e.rawY - downY
                     if (!dragging && hypot(dx, dy) > slop) {
                         dragging = true
+                        // Switch to absolute coordinates only for a real drag. Taps and long presses
+                        // keep the bubble anchored to its screen edge.
+                        toAbsolute()
+                        startX = lp.x
+                        startY = lp.y
                         if (panel != null) hidePanel()
                         val cancel = MotionEvent.obtain(e).apply { action = MotionEvent.ACTION_CANCEL }
                         detector.onTouchEvent(cancel)
