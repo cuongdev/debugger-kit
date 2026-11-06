@@ -330,4 +330,8 @@
     <string name="rules_app_not_found">Không tìm thấy app</string>
     <string name="rules_stays_off">Gỡ lỗi vẫn tắt. Bật lại khi bạn dùng xong.</string>
     <string name="rules_shortcut_long">%s không gỡ lỗi</string>
+    <string name="usage_dialog_title">Cho phép truy cập dữ liệu sử dụng?</string>
+    <string name="usage_dialog_body">Debugger Kit chỉ dùng quyền này để biết app nào đang mở, nhằm tắt gỡ lỗi cho các app trong danh sách của bạn. Không lưu và không gửi dữ liệu đi đâu. Tiếp theo Android sẽ mở phần cài đặt: hãy tìm Debugger Kit và bật lên.</string>
+    <string name="usage_dialog_continue">Tiếp tục</string>
+    <string name="usage_dialog_cancel">Để sau</string>
 </resources>

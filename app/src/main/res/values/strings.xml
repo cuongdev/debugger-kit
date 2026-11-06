@@ -346,4 +346,8 @@
     <string name="rules_app_not_found">App not found</string>
     <string name="rules_stays_off">Debugging stays off. Turn it back on when you are done.</string>
     <string name="rules_shortcut_long">%s without debugging</string>
+    <string name="usage_dialog_title">Allow usage access?</string>
+    <string name="usage_dialog_body">Debugger Kit uses it only to see which app is in front, so it can turn debugging off for the apps in your list. Nothing is stored or sent anywhere. Android opens its settings next: find Debugger Kit and turn it on.</string>
+    <string name="usage_dialog_continue">Continue</string>
+    <string name="usage_dialog_cancel">Not now</string>
 </resources>

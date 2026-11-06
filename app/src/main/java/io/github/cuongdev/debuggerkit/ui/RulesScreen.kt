@@ -1,6 +1,10 @@
 package io.github.cuongdev.debuggerkit.ui
 
 import android.content.Context
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.ui.res.stringResource
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -78,6 +82,26 @@ fun RulesScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
         onPauseOrDispose { }
     }
     val usage = remember(tick) { g.appRules.hasUsageAccess() }
+    // Prominent disclosure before sending the user to the Usage access system screen.
+    var askUsage by remember { mutableStateOf(false) }
+    if (askUsage) {
+        AlertDialog(
+            onDismissRequest = { askUsage = false },
+            title = { Text(stringResource(R.string.usage_dialog_title)) },
+            text = { Text(stringResource(R.string.usage_dialog_body)) },
+            confirmButton = {
+                TextButton(onClick = { askUsage = false; openUsageAccess(ctx) }) {
+                    Text(stringResource(R.string.usage_dialog_continue), color = Dk.Mint)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { askUsage = false }) { Text(stringResource(R.string.usage_dialog_cancel), color = Dk.Soft) }
+            },
+            containerColor = Dk.Surface,
+            titleContentColor = Dk.Text,
+            textContentColor = Dk.Soft,
+        )
+    }
     val entries by produceState(emptyMap<String, AppEntry>(), prefs.appRules.keys) {
         value = withContext(Dispatchers.IO) { prefs.appRules.keys.mapNotNull { appEntry(ctx, it) }.associateBy { it.pkg } }
     }
@@ -96,7 +120,7 @@ fun RulesScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
                 { on ->
                     g.prefs.setAppRulesEnabled(on)
                     BubbleService.sync(ctx)
-                    if (on && !usage) openUsageAccess(ctx)
+                    if (on && !usage) askUsage = true
                 },
                 sub = if (usage) stringResource(R.string.rules_auto_sub_ok)
                 else stringResource(R.string.rules_auto_sub_need),
@@ -105,7 +129,7 @@ fun RulesScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
             ValueRow(
                 stringResource(R.string.usage_access),
                 stringResource(if (usage) R.string.allowed else R.string.allow),
-                onClick = if (usage) null else ({ openUsageAccess(ctx) }),
+                onClick = if (usage) null else ({ askUsage = true }),
                 valueColor = if (usage) Dk.Mint else Dk.Amber,
             )
         }
@@ -213,9 +237,10 @@ private fun RuleCard(
                 Modifier.fillMaxWidth(),
                 height = 36.dp,
             )
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlineButton(stringResource(R.string.open_without_debugging), onOpen, Modifier.weight(1f), height = 40.dp, color = Dk.Mint, border = Dk.MintBorder)
-                OutlineButton(stringResource(R.string.add_to_home), onPin, height = 40.dp, border = Dk.Grip)
+            // Same width and height for both buttons, whatever the label length or language.
+            Row(Modifier.height(IntrinsicSize.Max), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlineButton(stringResource(R.string.open_without_debugging), onOpen, Modifier.weight(1f).fillMaxHeight(), height = 44.dp, color = Dk.Mint, border = Dk.MintBorder)
+                OutlineButton(stringResource(R.string.add_to_home), onPin, Modifier.weight(1f).fillMaxHeight(), height = 44.dp, border = Dk.Grip)
             }
         }
     }
