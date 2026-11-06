@@ -41,6 +41,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.cuongdev.debuggerkit.AppInfo
 import io.github.cuongdev.debuggerkit.BuildConfig
 import io.github.cuongdev.debuggerkit.R
+import io.github.cuongdev.debuggerkit.core.ActivityLog
 import io.github.cuongdev.debuggerkit.core.AppPrefs
 import io.github.cuongdev.debuggerkit.core.DebugState
 import io.github.cuongdev.debuggerkit.core.KeepMode
@@ -190,8 +191,6 @@ fun SettingsScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
 
         SectionLabel(stringResource(R.string.activity_log))
         val fmt = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val onMessages = listOf(R.string.log_usb_on, R.string.log_wifi_on, R.string.log_dev_on, R.string.log_awake_on)
-            .map { stringResource(it) }
         Column(
             Modifier
                 .fillMaxWidth()
@@ -210,11 +209,11 @@ fun SettingsScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
                 ) {
                     Text(fmt.format(Date(e.time)), Modifier.width(44.dp), fontFamily = Mono, fontSize = 12.sp, color = Dk.Muted)
                     Text(
-                        e.message,
+                        ActivityLog.describe(ctx, e.message),
                         Modifier.weight(1f),
                         fontFamily = Mono,
                         fontSize = 12.sp,
-                        color = if (e.message in onMessages) Dk.Mint else Dk.Text,
+                        color = if (e.message in ActivityLog.ON_EVENTS) Dk.Mint else Dk.Text,
                         maxLines = 1,
                     )
                     Text(e.source, fontFamily = Mono, fontSize = 12.sp, color = Dk.Muted)
@@ -227,7 +226,7 @@ fun SettingsScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
                         val send = Intent(Intent.ACTION_SEND)
                             .setType("text/csv")
                             .putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.export_subject))
-                            .putExtra(Intent.EXTRA_TEXT, g.log.toCsv())
+                            .putExtra(Intent.EXTRA_TEXT, g.log.toCsv(ctx))
                         ctx.startActivity(Intent.createChooser(send, ctx.getString(R.string.export_chooser)))
                     },
                     enabled = log.isNotEmpty(),

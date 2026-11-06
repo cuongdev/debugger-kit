@@ -1,7 +1,6 @@
 package io.github.cuongdev.debuggerkit.core
 
 import android.content.Context
-import io.github.cuongdev.debuggerkit.R
 import android.database.ContentObserver
 import android.os.Handler
 import android.os.Looper
@@ -66,7 +65,7 @@ class DebugController(
             autoOff.cancel()
             if (p.restoreScreen) releaseStayOn()
         }
-        log.add(context.getString(if (on) R.string.log_usb_on else R.string.log_usb_off), source)
+        log.add(if (on) ActivityLog.USB_ON else ActivityLog.USB_OFF, source)
         refresh()
         return Result.OK
     }
@@ -78,7 +77,7 @@ class DebugController(
         sys.putGlobalInt(Keys.ADB_WIFI_ENABLED, target)
         refresh()
         if (sys.globalInt(Keys.ADB_WIFI_ENABLED) != target) return Result.FAILED
-        log.add(context.getString(if (on) R.string.log_wifi_on else R.string.log_wifi_off), source)
+        log.add(if (on) ActivityLog.WIFI_ON else ActivityLog.WIFI_OFF, source)
         return Result.OK
     }
 
@@ -94,7 +93,7 @@ class DebugController(
         sys.putGlobalInt(Keys.DEV_SETTINGS, if (on) 1 else 0)
         refresh()
         if (sys.globalInt(Keys.DEV_SETTINGS) != (if (on) 1 else 0)) return Result.FAILED
-        log.add(context.getString(if (on) R.string.log_dev_on else R.string.log_dev_off), source)
+        log.add(if (on) ActivityLog.DEV_ON else ActivityLog.DEV_OFF, source)
         return Result.OK
     }
 
@@ -103,7 +102,7 @@ class DebugController(
         sys.putGlobalInt(Keys.STAY_ON, if (on) STAY_ON_ALL else 0)
         prefs.setStayOnBefore(-1)
         refresh()
-        log.add(context.getString(if (on) R.string.log_awake_on else R.string.log_awake_off), source)
+        log.add(if (on) ActivityLog.AWAKE_ON else ActivityLog.AWAKE_OFF, source)
         return Result.OK
     }
 
@@ -114,7 +113,7 @@ class DebugController(
     fun configureAutoOff(enabled: Boolean, minutes: Int = prefs.value.autoOffMinutes, source: String) {
         prefs.setAutoOffConfig(enabled, minutes)
         if (!enabled) autoOff.cancel() else if (read().usb) autoOff.start(minutes)
-        log.add(if (enabled) context.getString(R.string.chip_auto_off_min, minutes) else context.getString(R.string.log_auto_off_disabled), source)
+        log.add(if (enabled) ActivityLog.autoOff(minutes) else ActivityLog.AUTO_OFF_DISABLED, source)
     }
 
     private fun checkDebugAccess(): Result? = when {
