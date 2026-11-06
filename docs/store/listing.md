@@ -93,6 +93,10 @@ Without it the app shows read only status and a setup guide."
 Description to paste:
 "Debugger Kit shows a floating button over other apps that toggles USB debugging, and it watches which app is in front to turn debugging off for apps the user listed (for example banking apps). These features must keep running while the user works in other apps, so they run in a foreground service with a persistent notification. The user starts and stops the service from the app."
 
+The declaration form also asks for a short video. Record about 30 seconds on a phone: turn on the floating
+button, tap it to toggle USB debugging, open a listed app and show debugging turning off, then leave the app.
+Upload it as an unlisted YouTube video and paste the link.
+
 **Usage access (PACKAGE_USAGE_STATS)**: optional, used only by "Debug off per app" to know which app is in front. The screen that asks for it explains why before sending the user to system settings.
 
 **Display over other apps (SYSTEM_ALERT_WINDOW)**: core feature, the floating bubble.
@@ -105,6 +109,10 @@ Not used: accessibility services, QUERY_ALL_PACKAGES, location, contacts, camera
 
 ## Release checklist
 
+0. Before the first release, replace `[YOUR SUPPORT EMAIL]` above with a public support address.
+   Personal developer accounts created after November 13, 2023 must run a closed test with at least
+   12 opted in testers for 14 days in a row before they can apply for production access (check the
+   current numbers in Play Console, Google has changed them before).
 1. Bump `versionCode` and `versionName` in `app/build.gradle.kts`, add a CHANGELOG entry.
 2. Build with JDK 17 to 21: `./gradlew bundleRelease`.
 3. Upload `app/build/outputs/bundle/release/app-release.aab` to the internal testing track first.
@@ -114,3 +122,5 @@ Not used: accessibility services, QUERY_ALL_PACKAGES, location, contacts, camera
    Both are git ignored on purpose.
 6. Fill the store listing, app content answers and the foreground service declaration above.
 7. Test the internal build on at least one Pixel and one OEM phone (ColorOS, HyperOS or One UI), then promote.
+   Paths not yet tested on a real device: Shizuku and root shell actions, Android 8 to 12, HyperOS and
+   One UI grant flows, the Windows PowerShell setup commands, and the wireless guard on a network change.
