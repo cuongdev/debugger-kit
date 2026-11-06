@@ -81,6 +81,19 @@ Without it the release build is unsigned.
 
 Publishing notes, store texts and policy answers: [docs/store/listing.md](docs/store/listing.md).
 
+### Testing Debug off per app
+
+Debug builds ship a small test screen, "Debug off per app test" (`testing/AutoLeaveActivity`, debug source set only,
+never in release). It counts down and goes back to the home screen, so you can watch a rule turn debugging off and on
+while your computer stays connected:
+
+```bash
+# 1. In the store build, add "Debugger Kit Dev" under Debug off per app.
+# 2. Open the test screen; it leaves after 8 seconds (pass --ei seconds N to change it).
+adb shell am start -n io.github.cuongdev.debuggerkit.debug/io.github.cuongdev.debuggerkit.testing.AutoLeaveActivity
+# 3. adb drops while the rule is active, then comes back; check Settings, Activity log.
+```
+
 ## Translations
 
 Strings live in `app/src/main/res/values/strings.xml` (English) and `values-vi/strings.xml` (Vietnamese).

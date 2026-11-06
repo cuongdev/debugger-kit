@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!--
+            Debug builds only. Stands in for a banking app when testing "Debug off per app" over ADB.
+            CATEGORY_INFO makes it the target of getLaunchIntentForPackage(), so "Open without debugging"
+            opens it too, while the home screen icon still opens the normal app.
+        -->
+        <activity
+            android:name=".testing.AutoLeaveActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:theme="@android:style/Theme.Material.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.INFO" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
