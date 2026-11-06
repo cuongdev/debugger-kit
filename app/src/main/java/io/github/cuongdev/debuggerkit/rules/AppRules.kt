@@ -34,6 +34,9 @@ class AppRules(
     private var lastEventTs = 0L
     private var restoreAt = 0L
     private var suppressRestoreUntil = 0L
+    private var usageOk = false
+    private var usageCheckedAt = 0L
+    private val power = context.getSystemService(android.os.PowerManager::class.java)
 
     fun isActive(p: AppPrefs = prefs.value): Boolean = p.appRulesEnabled && p.appRules.isNotEmpty()
 
@@ -55,9 +58,16 @@ class AppRules(
     /** Called about every 700 ms by the background service. */
     @Synchronized
     fun poll() {
-        val p = prefs.value
-        if (!isActive(p) || !hasUsageAccess()) return
+        val p = prefs.flow.value
+        if (!isActive(p)) return
+        // Nothing can come to the front while the screen is off, so skip the binder calls.
+        if (power?.isInteractive == false) return
         val now = System.currentTimeMillis()
+        if (now - usageCheckedAt > USAGE_RECHECK_MS) {
+            usageOk = hasUsageAccess()
+            usageCheckedAt = now
+        }
+        if (!usageOk) return
         val fg = readForeground(now) ?: foreground
         if (fg != foreground) {
             foreground = fg
@@ -68,7 +78,7 @@ class AppRules(
             }
         }
         val inListedApp = fg != null && fg in p.appRules
-        val held = prefs.value.holdPkg.isNotEmpty()
+        val held = prefs.flow.value.holdPkg.isNotEmpty()
         when {
             inListedApp || !held -> restoreAt = 0
             now < suppressRestoreUntil -> Unit
@@ -199,6 +209,7 @@ class AppRules(
         private const val LOOKBACK_MS = 10 * 60_000L
         private const val RESTORE_DELAY_MS = 3_000L
         private const val LAUNCH_GRACE_MS = 5_000L
+        private const val USAGE_RECHECK_MS = 15_000L
 
         /** System screens that can pop up over a listed app without the user leaving it. */
         private val TRANSIENT = setOf(

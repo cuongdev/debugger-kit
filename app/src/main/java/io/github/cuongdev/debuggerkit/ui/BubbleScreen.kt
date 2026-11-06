@@ -59,7 +59,7 @@ fun BubbleScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
     }
     val overlay = remember(tick) { g.sys.canDrawOverlays() }
     val notifications = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { }
-    val now = rememberNow()
+    val now = rememberNow(active = state.usb && prefs.autoOffAt > 0 && prefs.bubbleEnabled)
 
     ScreenColumn {
         ScreenTitle(stringResource(R.string.floating_button), stringResource(R.string.bubble_sub))
