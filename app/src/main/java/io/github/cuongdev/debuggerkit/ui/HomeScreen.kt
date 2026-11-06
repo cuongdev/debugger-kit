@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -48,7 +51,7 @@ import java.util.Date
 fun HomeScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
     val ctx = LocalContext.current
     val g = ctx.graph
-    val now = rememberNow()
+    val now = rememberNow(active = state.usb && prefs.autoOffAt > 0, periodMs = 15_000L)
     val handle: (DebugController.Result) -> Unit = { r ->
         resultMessage(ctx, r)?.let { ctx.toast(it) }
         if (r == DebugController.Result.NO_PERMISSION) go("setup")
@@ -120,16 +123,17 @@ fun HomeScreen(state: DebugState, prefs: AppPrefs, go: (String) -> Unit) {
             enabled = state.ready,
         ) { handle(g.controller.setWireless(!state.wireless, "app")) }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        // Both cards take the height of the taller one, whatever the title length or language.
+        Row(Modifier.height(IntrinsicSize.Max), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             SmallToggle(
                 R.drawable.ic_tile_code, stringResource(R.string.developer_options),
                 if (state.devOptions) stringResource(R.string.dev_menu_visible) else stringResource(R.string.dev_menu_hidden),
-                state.devOptions, state.ready, Modifier.weight(1f),
+                state.devOptions, state.ready, Modifier.weight(1f).fillMaxHeight(),
             ) { handle(g.controller.setDevOptions(!state.devOptions, "app")) }
             SmallToggle(
                 R.drawable.ic_tile_coffee, stringResource(R.string.keep_awake),
                 if (state.keepAwake) stringResource(R.string.awake_while_charging) else stringResource(R.string.state_off),
-                state.keepAwake, state.hasPermission, Modifier.weight(1f),
+                state.keepAwake, state.hasPermission, Modifier.weight(1f).fillMaxHeight(),
             ) { handle(g.controller.setKeepAwake(!state.keepAwake, "app")) }
         }
 

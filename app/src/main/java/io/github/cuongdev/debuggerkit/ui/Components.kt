@@ -16,7 +16,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -185,7 +189,8 @@ fun ValueRow(title: String, value: String, onClick: (() -> Unit)? = null, valueC
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Text(title, Modifier.weight(1f), fontSize = 14.sp, fontWeight = FontWeight.Medium, color = Dk.Text)
-        Text(value, fontSize = 13.sp, color = valueColor)
+        // Capped so a long translated value wraps instead of squeezing the title.
+        Text(value, Modifier.widthIn(max = 180.dp), fontSize = 13.sp, color = valueColor, textAlign = TextAlign.End)
         if (onClick != null) {
             Icon(painterResource(R.drawable.ic_chevron), null, Modifier.size(16.dp), tint = Dk.Muted)
         }
@@ -200,8 +205,10 @@ fun Segmented(
     modifier: Modifier = Modifier,
     height: Dp = 40.dp,
 ) {
+    // Long labels (other languages, large font sizes) wrap and every segment grows to the same height.
     Row(
         modifier
+            .height(IntrinsicSize.Max)
             .clip(RoundedCornerShape(12.dp))
             .background(Dk.Bg)
             .padding(3.dp),
@@ -212,13 +219,22 @@ fun Segmented(
             Box(
                 Modifier
                     .weight(1f)
-                    .height(height)
+                    .fillMaxHeight()
+                    .heightIn(min = height)
                     .clip(RoundedCornerShape(9.dp))
                     .background(if (on) Dk.Text else Color.Transparent)
-                    .selectable(selected = on, role = Role.Tab, onClick = { onSelect(i) }),
+                    .selectable(selected = on, role = Role.Tab, onClick = { onSelect(i) })
+                    .padding(horizontal = 6.dp, vertical = 4.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(label, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = if (on) Dk.Bg else Dk.Soft)
+                Text(
+                    label,
+                    fontSize = 13.sp,
+                    lineHeight = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = if (on) Dk.Bg else Dk.Soft,
+                )
             }
         }
     }
@@ -343,7 +359,7 @@ fun PrimaryButton(
             .padding(horizontal = 18.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = if (enabled) textColor else Dk.Muted)
+        Text(text, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center, color = if (enabled) textColor else Dk.Muted)
     }
 }
 
@@ -369,7 +385,7 @@ fun OutlineButton(
             .padding(horizontal = 14.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = if (enabled) color else Dk.Muted)
+        Text(text, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center, color = if (enabled) color else Dk.Muted)
     }
 }
 
@@ -430,10 +446,12 @@ private fun RowScope.NavItem(
 
 // Helpers
 
+/** Current time that refreshes every [periodMs], only while [active], so idle screens do not recompose. */
 @Composable
-fun rememberNow(periodMs: Long = 1_000L): Long {
-    val now by produceState(System.currentTimeMillis()) {
-        while (true) {
+fun rememberNow(active: Boolean = true, periodMs: Long = 1_000L): Long {
+    val now by produceState(System.currentTimeMillis(), active, periodMs) {
+        value = System.currentTimeMillis()
+        while (active) {
             delay(periodMs)
             value = System.currentTimeMillis()
         }

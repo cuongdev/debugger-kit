@@ -1,6 +1,15 @@
 package io.github.cuongdev.debuggerkit.ui
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import io.github.cuongdev.debuggerkit.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.Column
@@ -45,7 +54,7 @@ fun LicensesScreen(onBack: () -> Unit) {
         DkCard {
             LICENSES.forEachIndexed { i, l ->
                 if (i > 0) RowDivider()
-                ValueRow(l.name, l.license, onClick = {
+                LicenseRow(l.name, l.license, onClick = {
                     if (l.asset != null) open = if (open == l.asset) null else l.asset else ctx.openUrl(l.url)
                 })
                 if (l.asset != null && open == l.asset) {
@@ -64,5 +73,25 @@ fun LicensesScreen(onBack: () -> Unit) {
             fontWeight = FontWeight.Medium,
             color = Dk.Muted,
         )
+    }
+}
+
+/** Name above license, so long project names never get squeezed and broken mid word. */
+@Composable
+private fun LicenseRow(name: String, license: String, onClick: () -> Unit) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clickable(role = Role.Button, onClick = onClick)
+            .heightIn(min = 56.dp)
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(name, fontSize = 14.sp, lineHeight = 18.sp, fontWeight = FontWeight.Medium, color = Dk.Text)
+            Text(license, fontSize = 12.sp, lineHeight = 16.sp, color = Dk.Muted)
+        }
+        Icon(painterResource(R.drawable.ic_chevron), null, Modifier.size(16.dp), tint = Dk.Muted)
     }
 }

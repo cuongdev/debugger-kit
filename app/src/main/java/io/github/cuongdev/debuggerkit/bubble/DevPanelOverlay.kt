@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -177,9 +180,9 @@ fun DevPanelOverlay(anchor: PanelAnchor, onClose: () -> Unit, onOpenApp: (String
                 Text(stringResource(R.string.panel_empty), fontSize = 13.sp, color = Dk.Muted)
             }
             items.chunked(3).forEach { row ->
-                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                Row(Modifier.height(IntrinsicSize.Max), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     row.forEach { item ->
-                        PanelTile(item, Modifier.weight(1f)) {
+                        PanelTile(item, Modifier.weight(1f).fillMaxHeight()) {
                             if (!item.available) ctx.toast(ctx.getString(R.string.msg_needs_shell))
                             else launchAction { g.devTools.perform(item.action) }
                         }

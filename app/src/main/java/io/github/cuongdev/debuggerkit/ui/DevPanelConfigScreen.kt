@@ -7,6 +7,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -124,9 +127,9 @@ fun DevPanelConfigScreen(prefs: AppPrefs, onBack: () -> Unit, go: (String) -> Un
             )
         }
         DevAction.entries.chunked(2).forEach { row ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(Modifier.height(IntrinsicSize.Max), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 row.forEach { a ->
-                    ActionCard(a, a.id in prefs.panelActions, Modifier.weight(1f)) { g.prefs.setPanelAction(a.id, it) }
+                    ActionCard(a, a.id in prefs.panelActions, Modifier.weight(1f).fillMaxHeight()) { g.prefs.setPanelAction(a.id, it) }
                 }
                 if (row.size == 1) Spacer(Modifier.weight(1f))
             }
