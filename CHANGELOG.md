@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+* Equal heights for cards, buttons and segmented controls in every language; long labels wrap instead of clipping.
+* Prominent disclosure before asking for usage access.
+* Activity log lines follow the app language.
+* Lighter background work: the per app check pauses while the screen is off, and log writes leave the main thread.
+
 ## 1.0.0 (November 6, 2026)
 
 First public release.
